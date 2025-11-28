@@ -1,18 +1,16 @@
 // --- Configuration simple ---
-// Ville et pays pour AlAdhan
 const CITY = "Lille";
 const COUNTRY = "France";
 const METHOD = 3; // Muslim World League
 
-// --- Sélecteurs DOM ---
-const dateDuJourEl = document.getElementById("date-du-jour");
-const prochainePriereTexteEl = document.getElementById("prochaine-priere-texte");
-const tablePrieresEl = document.getElementById("table-prieres");
-const messageErreurEl = document.getElementById("message-erreur");
-
-const btnAnnonceProchaine = document.getElementById("btn-annonce-prochaine");
-const btnLireToutes = document.getElementById("btn-lire-toutes");
-const toggleMessageAmour = document.getElementById("toggle-message-amour");
+// --- Références DOM (remplies dans init) ---
+let dateDuJourEl,
+  prochainePriereTexteEl,
+  tablePrieresEl,
+  messageErreurEl,
+  btnAnnonceProchaine,
+  btnLireToutes,
+  toggleMessageAmour;
 
 // --- État en mémoire ---
 let prayerList = []; // { id, label, time (Date), rawString }
@@ -71,9 +69,6 @@ function initLoveMessageToggle() {
 
 // --- Récupération des horaires via API AlAdhan ---
 async function fetchPrayerTimes() {
-  // Doc officielle AlAdhan : timingsByCity pour la date du jour
-  // Exemple : https://api.aladhan.com/v1/timingsByCity?city=Lille&country=France&method=3
-
   const url = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(
     CITY
   )}&country=${encodeURIComponent(COUNTRY)}&method=${METHOD}`;
@@ -96,7 +91,6 @@ async function fetchPrayerTimes() {
 
   return json.data.timings;
 }
-
 
 // --- Construction de la liste des prières ---
 function buildPrayerList(timings) {
@@ -199,6 +193,31 @@ function onLireToutes() {
 
 // --- Initialisation globale ---
 async function init() {
+  // 1) Récupérer les éléments du DOM *ici*
+  dateDuJourEl = document.getElementById("date-du-jour");
+  prochainePriereTexteEl = document.getElementById("prochaine-priere-texte");
+  tablePrieresEl = document.getElementById("table-prieres");
+  messageErreurEl = document.getElementById("message-erreur");
+  btnAnnonceProchaine = document.getElementById("btn-annonce-prochaine");
+  btnLireToutes = document.getElementById("btn-lire-toutes");
+  toggleMessageAmour = document.getElementById("toggle-message-amour");
+
+  // 2) Sécurité : vérifier que tout existe
+  if (
+    !dateDuJourEl ||
+    !prochainePriereTexteEl ||
+    !tablePrieresEl ||
+    !messageErreurEl ||
+    !btnAnnonceProchaine ||
+    !btnLireToutes ||
+    !toggleMessageAmour
+  ) {
+    console.error(
+      "Certains éléments du DOM sont introuvables. Vérifie les id dans index.html."
+    );
+    return;
+  }
+
   // Date du jour
   const now = new Date();
   dateDuJourEl.textContent = `Nous sommes le ${formatDateFr(now)}.`;
