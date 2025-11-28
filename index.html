@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prière Accessible</title>
+<meta name="description" content="Horaires de prière accessibles pour iPhone et VoiceOver." />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+<h1>Prière Accessible</h1>
+<p>Application d'horaires de prière accessible pour iPhone.</p>
+<button id="helpButton" aria-controls="helpPanel" aria-expanded="false">Aide</button>
+</header>
+<main>
+<section aria-labelledby="date-title">
+<h2 id="date-title">Aujourd'hui</h2>
+<p id="currentDate">Date en chargement</p>
+<p id="currentLocation">Lieu non configuré.</p>
+</section>
+<section id="nextPrayerSection" aria-live="polite" role="status">
+<h2>Prochaine prière</h2>
+<p id="nextPrayerName">Chargement</p>
+<p id="nextPrayerTime"></p>
+</section>
+<section aria-labelledby="list-title">
+<h2 id="list-title">Prières du jour</h2>
+<ul id="prayerList"></ul>
+</section>
+<section class="actions">
+<button id="announceNextButton">Annoncer la prochaine prière</button>
+<button id="readAllButton">Lire tous les horaires de la journée</button>
+</section>
+<section aria-labelledby="dua-title">
+<h2 id="dua-title">Douas et invocations</h2>
+<p>Invocations importantes à réciter en français.</p>
+<div class="dua-item">
+<h3>Avant la prière</h3>
+<p class="dua-text">Bismillah, Allahou Akbar. Je me tourne vers Toi, ô Allah, avec l'intention de faire cette prière pour Ta satisfaction.</p>
+<button class="dua-button" data-dua="Avant la prière : Bismillah, Allahou Akbar. Je me tourne vers Toi, ô Allah, avec l'intention de faire cette prière pour Ta satisfaction.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Après la prière</h3>
+<p class="dua-text">Astaghfiroullah, Astaghfiroullah, Astaghfiroullah. Ô Allah, pardonne-moi mes péchés et accepte ma prière. Que la paix et les bénédictions soient sur le Prophète Muhammad.</p>
+<button class="dua-button" data-dua="Après la prière : Astaghfiroullah, Astaghfiroullah, Astaghfiroullah. Ô Allah, pardonne-moi mes péchés et accepte ma prière. Que la paix et les bénédictions soient sur le Prophète Muhammad.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Doua du matin</h3>
+<p class="dua-text">Allahoumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namout, wa ilayka an-nouchour. Ô Allah, par Toi nous entrons dans le matin, par Toi nous entrons dans le soir, par Toi nous vivons, par Toi nous mourons, et vers Toi est le retour.</p>
+<button class="dua-button" data-dua="Doua du matin : Allahoumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namout, wa ilayka an-nouchour. Ô Allah, par Toi nous entrons dans le matin, par Toi nous entrons dans le soir, par Toi nous vivons, par Toi nous mourons, et vers Toi est le retour.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Doua du soir</h3>
+<p class="dua-text">Allahoumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namout, wa ilayka al-massir. Ô Allah, par Toi nous entrons dans le soir, par Toi nous entrons dans le matin, par Toi nous vivons, par Toi nous mourons, et vers Toi est la destinée.</p>
+<button class="dua-button" data-dua="Doua du soir : Allahoumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namout, wa ilayka al-massir. Ô Allah, par Toi nous entrons dans le soir, par Toi nous entrons dans le matin, par Toi nous vivons, par Toi nous mourons, et vers Toi est la destinée.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Avant de manger</h3>
+<p class="dua-text">Bismillah. Au nom d'Allah, je commence. Ô Allah, bénis ce repas et facilite-nous la subsistance licite.</p>
+<button class="dua-button" data-dua="Avant de manger : Bismillah. Au nom d'Allah, je commence. Ô Allah, bénis ce repas et facilite-nous la subsistance licite.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Après avoir mangé</h3>
+<p class="dua-text">Alhamdoulillah. Louange à Allah qui nous a nourris et nous a donné à boire, et qui a fait de nous des musulmans.</p>
+<button class="dua-button" data-dua="Après avoir mangé : Alhamdoulillah. Louange à Allah qui nous a nourris et nous a donné à boire, et qui a fait de nous des musulmans.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>En entrant dans la maison</h3>
+<p class="dua-text">Bismillah walajna, wa bismillah kharajna, wa 'ala rabbina tawakkalna. Au nom d'Allah nous entrons, au nom d'Allah nous sortons, et c'est en notre Seigneur que nous plaçons notre confiance.</p>
+<button class="dua-button" data-dua="En entrant dans la maison : Bismillah walajna, wa bismillah kharajna, wa 'ala rabbina tawakkalna. Au nom d'Allah nous entrons, au nom d'Allah nous sortons, et c'est en notre Seigneur que nous plaçons notre confiance.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Demander le pardon</h3>
+<p class="dua-text">Astaghfiroullah al-'adhim, alladhi la ilaha illa houwa al-Hayy al-Qayyoum, wa atoubou ilayh. Je demande pardon à Allah le Très Grand, il n'y a de divinité que Lui, le Vivant, l'Éternel, et je me repens vers Lui.</p>
+<button class="dua-button" data-dua="Demander le pardon : Astaghfiroullah al-'adhim, alladhi la ilaha illa houwa al-Hayy al-Qayyoum, wa atoubou ilayh. Je demande pardon à Allah le Très Grand, il n'y a de divinité que Lui, le Vivant, l'Éternel, et je me repens vers Lui.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Tasbih (Glorification)</h3>
+<p class="dua-text">Soubhanallah, Alhamdoulillah, Allahou Akbar. Gloire à Allah, Louange à Allah, Allah est le Plus Grand. (Répéter 33 fois chacune)</p>
+<button class="dua-button" data-dua="Tasbih : Soubhanallah, Alhamdoulillah, Allahou Akbar. Gloire à Allah, Louange à Allah, Allah est le Plus Grand. Répéter 33 fois chacune.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>Demander la guidance</h3>
+<p class="dua-text">Rabbi zidni 'ilma. Ô mon Seigneur, augmente-moi en connaissance. Rabbi chrahli sadri, wa yassirli amri. Ô mon Seigneur, ouvre-moi la poitrine et facilite-moi ma tâche.</p>
+<button class="dua-button" data-dua="Demander la guidance : Rabbi zidni 'ilma. Ô mon Seigneur, augmente-moi en connaissance. Rabbi chrahli sadri, wa yassirli amri. Ô mon Seigneur, ouvre-moi la poitrine et facilite-moi ma tâche.">Écouter</button>
+</div>
+<div class="dua-item">
+<h3>En cas de difficulté</h3>
+<p class="dua-text">Hasbounallahu wa ni'mal wakeel. Allah nous suffit et Il est le Meilleur des garants. La hawla wa la quwwata illa billah. Il n'y a de force ni de puissance qu'en Allah.</p>
+<button class="dua-button" data-dua="En cas de difficulté : Hasbounallahu wa ni'mal wakeel. Allah nous suffit et Il est le Meilleur des garants. La hawla wa la quwwata illa billah. Il n'y a de force ni de puissance qu'en Allah.">Écouter</button>
+</div>
+<button id="readAllDuasButton" class="read-all-button">Lire toutes les invocations</button>
+</section>
+<section aria-labelledby="settings-title">
+<h2 id="settings-title">Réglages rapides</h2>
+<form id="settingsForm">
+<label>Ville<input type="text" id="cityInput" placeholder="Paris" /></label>
+<label>Pays<input type="text" id="countryInput" placeholder="France" /></label>
+<label>Latitude<input type="number" id="latInput" step="0.0001" placeholder="48.8566" /></label>
+<label>Longitude<input type="number" id="lonInput" step="0.0001" placeholder="2.3522" /></label>
+<label>Méthode de calcul<select id="methodSelect"><option value="3">Muslim World League</option><option value="4">Umm al-Qura</option><option value="5">Egyptian General Authority</option></select></label>
+<label>Madhhab pour Asr<select id="schoolSelect"><option value="0">Standard</option><option value="1">Hanafi</option></select></label>
+<label class="toggle"><input type="checkbox" id="welcomeToggle" />Lire  De la part de ton amoureux, Anas. </label>
+<button type="submit">Sauvegarder les réglages</button>
+</form>
+</section>
+</main>
+<aside id="helpPanel" hidden tabindex="-1">
+<h2>Aide</h2>
+<p>Balaye du haut vers le bas avec VoiceOver pour lire la page.</p>
+<p>La section "Prochaine prière" annonce automatiquement les changements.</p>
+<p>Le bouton "Annoncer la prochaine prière" lit la prochaine prière à voix haute.</p>
+<p>Le bouton "Lire tous les horaires" lit les cinq prières du jour.</p>
+<p>Dans les réglages, tu peux changer la ville, le pays, la méthode de calcul et activer ou désactiver le message "De la part de ton amoureux, Anas.".</p>
+<p>Après avoir modifié les réglages, valide avec "Sauvegarder les réglages".</p>
+<p>La section "Douas et invocations" contient des invocations importantes à réciter. Chaque invocation a un bouton "Écouter" pour l'entendre à voix haute. Tu peux aussi utiliser le bouton "Lire toutes les invocations" pour les entendre toutes à la suite.</p>
+</aside>
+<div id="statusMessage" role="alert" aria-live="assertive"></div>
+<script src="app.js" type="module"></script>
+</body>
+</html>
