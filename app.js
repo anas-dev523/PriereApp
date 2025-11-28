@@ -71,28 +71,32 @@ function initLoveMessageToggle() {
 
 // --- Récupération des horaires via API AlAdhan ---
 async function fetchPrayerTimes() {
-  const today = new Date();
-  const day = today.getDate();
-  const month = today.getMonth() + 1;
-  const year = today.getFullYear();
+  // Doc officielle AlAdhan : timingsByCity pour la date du jour
+  // Exemple : https://api.aladhan.com/v1/timingsByCity?city=Lille&country=France&method=3
 
-  // Ex: https://api.aladhan.com/v1/timingsByCity?city=Lille&country=France&method=3&day=... etc.
   const url = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(
     CITY
-  )}&country=${encodeURIComponent(
-    COUNTRY
-  )}&method=${METHOD}&day=${day}&month=${month}&year=${year}`;
+  )}&country=${encodeURIComponent(COUNTRY)}&method=${METHOD}`;
+
+  console.log("Appel API AlAdhan :", url);
 
   const response = await fetch(url);
   if (!response.ok) {
+    console.error("Réponse réseau incorrecte :", response.status);
     throw new Error("Réponse réseau incorrecte");
   }
+
   const json = await response.json();
+  console.log("Réponse brute AlAdhan :", json);
+
   if (json.code !== 200 || !json.data || !json.data.timings) {
+    console.error("Format de données inattendu :", json);
     throw new Error("Format de données inattendu");
   }
+
   return json.data.timings;
 }
+
 
 // --- Construction de la liste des prières ---
 function buildPrayerList(timings) {
