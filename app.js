@@ -193,32 +193,18 @@ function onLireToutes() {
 
 // --- Initialisation globale ---
 async function init() {
-  // 1) Récupérer les éléments du DOM *ici*
-  dateDuJourEl = document.getElementById("date-du-jour");
-  prochainePriereTexteEl = document.getElementById("prochaine-priere-texte");
-  tablePrieresEl = document.getElementById("table-prieres");
-  messageErreurEl = document.getElementById("message-erreur");
-  btnAnnonceProchaine = document.getElementById("btn-annonce-prochaine");
-  btnLireToutes = document.getElementById("btn-lire-toutes");
-  toggleMessageAmour = document.getElementById("toggle-message-amour");
-
-  // 2) Sécurité : vérifier que tout existe
-  if (
-    !dateDuJourEl ||
-    !prochainePriereTexteEl ||
-    !tablePrieresEl ||
-    !messageErreurEl ||
-    !btnAnnonceProchaine ||
-    !btnLireToutes ||
-    !toggleMessageAmour
-  ) {
-    console.error(
-      "Certains éléments du DOM sont introuvables. Vérifie les id dans index.html."
-    );
-    return;
+  // 1) Désinscrire anciens SW
+  if ("serviceWorker" in navigator) {
+    try {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      regs.forEach((r) => r.unregister());
+      console.log("Anciens service workers désinscrits.");
+    } catch (e) {
+      console.warn("Impossible de désinscrire les service workers :", e);
+    }
   }
 
-  // Date du jour
+  // 2) Date du jour
   const now = new Date();
   dateDuJourEl.textContent = `Nous sommes le ${formatDateFr(now)}.`;
 
@@ -240,11 +226,11 @@ async function init() {
       "Les horaires de prière n’ont pas pu être chargés.";
   }
 
-  // Écouteurs des boutons
+  // 3) Boutons
   btnAnnonceProchaine.addEventListener("click", onAnnounceNextPrayer);
   btnLireToutes.addEventListener("click", onLireToutes);
 
-  // Première interaction globale sur la page pour le message d'amour
+  // 4) Premier clic => message d'amour éventuel
   document.body.addEventListener(
     "click",
     () => {
@@ -253,6 +239,7 @@ async function init() {
     { once: true }
   );
 }
+
 
 // Lancer l’app
 document.addEventListener("DOMContentLoaded", init);
